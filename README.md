@@ -1,27 +1,32 @@
 # Angulardashboard
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.4.
+Цей проект є простим фінансовим дашбордом, побудованим на Angular. Він включає два основні компоненти - Загальну Таблицю та Коротку Інформацію, надаючи висновки щодо даних про кредити, які вивантажуються з вказаного API.
 
-## Development server
+## Встановлення
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Склонуйте репозиторій:
+git clone  https://github.com/Dima2332171/angulardashboard.git
+Встановити залежності:
+npm install
 
-## Code scaffolding
+## Використання
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Запустіть додаток локально:
+ng serve
+Перейдіть за адресою http://localhost:4200/ у своєму браузері.
 
-## Build
+## Компоненти
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Загальна Таблиця
+Компонент Загальної Таблиці відображає таблицю даних про кредити. Він дозволяє користувачам застосовувати фільтри на основі початкової дати, кінцевої дати та статусу прострочення.
 
-## Running unit tests
+## Фільтри
+Початкова Дата: Виберіть початкову дату для фільтрації.
+Кінцева Дата: Виберіть кінцеву дату для фільтрації.
+Фільтр Простроченості: Позначте, щоб відображати лише прострочені кредити.
+Клацніть кнопку "Застосувати Фільтри", щоб оновити таблицю відповідно до вибраних фільтрів.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Коротка Інформація
+Компонент Короткої Інформації надає узагальнену інформацію про кредити, згруповану за місяцями та роками. Він відображає кількість виданих кредитів, загальну суму кредиту, загальний нарахований відсоток та кількість повернених кредитів.
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
