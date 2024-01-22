@@ -1,0 +1,41 @@
+<div class="container mt-4">
+  <h2 class="mb-3">Загальна Таблиця</h2>
+
+  <div class="row mb-3">
+    <div class="col-md-4 mb-2">
+      <label for="startDate" class="form-label">Початкова дата:</label>
+      <input type="date" id="startDate" class="form-control" [(ngModel)]="startDate">
+    </div>
+    <div class="col-md-4 mb-2">
+      <label for="endDate" class="form-label">Кінцева дата:</label>
+      <input type="date" id="endDate" class="form-control" [(ngModel)]="endDate">
+    </div>
+    <div class="col-md-4 mb-2">
+      <label for="overdueFilter" class="form-label">Прострочені кредити:</label>
+      <input type="checkbox" id="overdueFilter" class="form-check-input" [(ngModel)]="overdueFilter">
+    </div>
+    <div class="col-md-4">
+      <button class="btn btn-outline-secondary" (click)="applyFilters()">Застосувати фільтри</button>
+    </div>
+  </div>
+
+  <!-- Таблиця з даними -->
+  <table class="table table-responsive">
+    <thead>
+    <tr>
+      <th class="d-md-table-cell">Ім'я клієнта</th>
+      <th class="d-md-table-cell">Сума кредиту</th>
+      <th class="d-md-table-cell">Дата видачі</th>
+      <th class="d-md-table-cell">Дата повернення</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let loan of filteredLoans">
+      <td class="d-md-table-cell">{{ loan.user }}</td>
+      <td class="d-md-table-cell text-center">{{ loan.body | currency:'USD':'symbol':'1.0-3' }}</td>
+      <td class="d-md-table-cell text-center">{{ loan.issuance_date | date }}</td>
+      <td class="d-md-table-cell text-center">{{ loan.actual_return_date ? (loan?.actual_return_date | date) : 'Неповернено' }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

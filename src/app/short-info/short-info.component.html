@@ -1,0 +1,26 @@
+<div class="container mt-4">
+  <h2>Коротка Інформація</h2>
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th style="width: 15%;">Місяць</th>
+        <th style="width: 20%;">Кількість виданих кредитів</th>
+        <th style="width: 20%;">Загальна сума видачі</th>
+        <th style="width: 20%;">Загальна сума нарахованих відсотків</th>
+        <th style="width: 15%;">Кількість повернених кредитів</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let loan of totalLoansByMonth" class="text-center">
+        <td>{{ loan.month }}</td>
+        <td>{{ loan.count }}</td>
+        <td>{{ loan.totalAmount | currency:'USD':'symbol':'1.2-2' }}</td>
+        <td>{{ loan.totalInterest | currency:'USD':'symbol':'1.2-2' }}</td>
+        <td>{{ loan.returnedCount }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
