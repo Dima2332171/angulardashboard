@@ -5,20 +5,24 @@
     <table class="table table-bordered">
       <thead>
       <tr>
+        <!-- Добавлен новый заголовок -->
+
         <th style="width: 15%;">Місяць</th>
-        <th style="width: 20%;">Кількість виданих кредитів</th>
-        <th style="width: 20%;">Загальна сума видачі</th>
-        <th style="width: 20%;">Загальна сума нарахованих відсотків</th>
-        <th style="width: 15%;">Кількість повернених кредитів</th>
+        <th>Кількість виданих кредитів</th>
+        <th>Загальна сума видачі</th>
+        <th>Загальна сума нарахованих відсотків</th>
+        <th>Середня сума видачі кредитів</th>
+        <th>Кількість повернених кредитів</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let loan of totalLoansByMonth" class="text-center">
-        <td>{{ loan.month }}</td>
-        <td>{{ loan.count }}</td>
-        <td>{{ loan.totalAmount | currency:'USD':'symbol':'1.2-2' }}</td>
-        <td>{{ loan.totalInterest | currency:'USD':'symbol':'1.2-2' }}</td>
-        <td>{{ loan.returnedCount }}</td>
+      <tr *ngFor="let metric of totalLoansByMonth; let i = index" class="text-center">
+        <td>{{ metric.month }}</td>
+        <td>{{ metric.count }}</td>
+        <td>{{ metric.totalAmount | currency:'USD':'symbol':'1.2-2' }}</td>
+        <td>{{ metric.totalInterest | currency:'USD':'symbol':'1.2-2' }}</td>
+        <td>{{ averageLoanAmountByMonth[i].averageAmount | currency:'USD':'symbol':'1.2-2' }}</td>
+        <td>{{ metric.returnedCount }}</td>
       </tr>
       </tbody>
     </table>
