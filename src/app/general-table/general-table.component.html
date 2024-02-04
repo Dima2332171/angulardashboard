@@ -1,20 +1,37 @@
 <div class="container mt-4">
-  <h2 class="mb-3">Загальна Таблиця</h2>
 
-  <div class="row mb-3">
-    <div class="col-md-4 mb-2">
+  <!-- Первая строка с фильтрами -->
+  <div class="row mb-3 align-items-end">
+    <div class="col-md-3 mb-2">
+      <h2>По даті видачі</h2>
       <label for="startDate" class="form-label">Початкова дата:</label>
       <input type="date" id="startDate" class="form-control" [(ngModel)]="startDate">
     </div>
-    <div class="col-md-4 mb-2">
+    <div class="col-md-3 mb-2">
       <label for="endDate" class="form-label">Кінцева дата:</label>
       <input type="date" id="endDate" class="form-control" [(ngModel)]="endDate">
     </div>
-    <div class="col-md-4 mb-2">
+    <div class="col-md-3 mb-2">
       <label for="overdueFilter" class="form-label">Прострочені кредити:</label>
       <input type="checkbox" id="overdueFilter" class="form-check-input" [(ngModel)]="overdueFilter">
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3 mb-2">
+      <button class="btn btn-outline-secondary" (click)="applyFilters()">Застосувати фільтри</button>
+    </div>
+  </div>
+
+  <!-- Вторая строка с фильтрами -->
+  <div class="row mb-3 align-items-end">
+    <div class="col-md-3 mb-2">
+      <h3>По даті повернення</h3>
+      <label for="startDateReturn" class="form-label">Початкова дата:</label>
+      <input type="date" id="startDateReturn" class="form-control" [(ngModel)]="startDateReturn">
+    </div>
+    <div class="col-md-3 mb-2">
+      <label for="endDateReturn" class="form-label">Кінцева дата:</label>
+      <input type="date" id="endDateReturn" class="form-control" [(ngModel)]="endDateReturn">
+    </div>
+    <div class="col-md-3 mb-2">
       <button class="btn btn-outline-secondary" (click)="applyFilters()">Застосувати фільтри</button>
     </div>
   </div>

@@ -14,8 +14,10 @@ export class GeneralTableComponent implements OnInit {
   loans$!: Observable<Loan[]>;
   filteredLoans: Loan[] = [];
 
-  startDate: Date = new Date();
+  startDate: Date = new Date(2015,1,1);
   endDate: Date = new Date();
+  startDateReturn: Date = new Date(2015,1,1);
+  endDateReturn: Date = new Date();
   overdueFilter: boolean = false;
 
   constructor(private loanService: LoanService) {
@@ -39,11 +41,13 @@ export class GeneralTableComponent implements OnInit {
   }
 
   applyFilters(): void {
-    combineLatest([this.loans$, this.getFiltersObservable()]).subscribe(([loans, filters]) => {
-
-      if (loans) {
-        this.filteredLoans = this.filterLoans(loans, filters);
-        // console.log('Після фільтрації:', this.filteredLoans);
+    this.getFiltersObservable().subscribe(filters => {
+      if (this.loans$) {
+        this.loans$.subscribe(loans => {
+          if (loans) {
+            this.filteredLoans = this.filterLoans(loans, filters);
+          }
+        });
       }
     });
   }
@@ -51,34 +55,33 @@ export class GeneralTableComponent implements OnInit {
   private filterLoans(loans: Loan[], filters: FilterOptions): Loan[] {
     let filteredData = [...loans];
 
-    if (filters.startDate) {
+    if (filters.startDate&&filters.endDate) {
       filteredData = filteredData.filter(loan => {
         const issuanceDate = new Date(loan.issuance_date);
         const startFilterDate = new Date(filters.startDate!);
-        // Порівнюємо тільки дату без часу
+        const endFilterDate = new Date(filters.endDate!);
         issuanceDate.setHours(0, 0, 0, 0);
         startFilterDate.setHours(0, 0, 0, 0);
-        return issuanceDate >= startFilterDate;
+        return (issuanceDate >= startFilterDate)&&(issuanceDate <= endFilterDate);
       });
     }
-
-
-    if (filters.endDate) {
-      filteredData = filteredData.filter(loan => {
-        const issuanceDate = new Date(loan.issuance_date);
-        const endFilterDate = new Date(filters.endDate!);
-        // Порівнюємо тільки дату без часу
-        issuanceDate.setHours(0, 0, 0, 0);
-        endFilterDate.setHours(0, 0, 0, 0);
-        return issuanceDate <= endFilterDate;
-      });
-    }
-
     if (filters.overdueFilter) {
       const today = new Date();
       filteredData = filteredData.filter(loan => {
         const actualReturnDate = new Date(loan.actual_return_date!);
-        return !loan.actual_return_date && actualReturnDate < today;
+        const returnDate = new Date(loan.return_date);
+        return !loan.actual_return_date && (actualReturnDate < today)||(actualReturnDate>returnDate);
+      });
+    }
+
+    if(filters.startDateReturn&&filters.endDateReturn){
+      filteredData = filteredData.filter(loan => {
+        const startFilterDate = new Date(filters.startDateReturn!);
+        const endFilterDate = new Date(filters.endDateReturn!);
+        const actualReturnDate = new Date(loan.actual_return_date!);
+        actualReturnDate.setHours(0, 0, 0, 0);
+        startFilterDate.setHours(0, 0, 0, 0);
+        return (actualReturnDate >= startFilterDate)&&(actualReturnDate <= endFilterDate);
       });
     }
     return filteredData;
@@ -89,6 +92,8 @@ export class GeneralTableComponent implements OnInit {
       startDate: this.startDate,
       endDate: this.endDate,
       overdueFilter: this.overdueFilter,
+      startDateReturn: this.startDateReturn,
+      endDateReturn: this.endDateReturn,
     });
   }
 }
