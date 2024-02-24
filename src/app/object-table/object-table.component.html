@@ -1,0 +1,31 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-4">
+      <label for="nameFilter">Filter by Name:</label>
+      <input id="nameFilter" class="form-control" [(ngModel)]="filterName" (input)="applyFilters()" />
+    </div>
+    <div class="col-4">
+      <label for="stateFilter">Filter by State:</label>
+      <input id="stateFilter" class="form-control" [(ngModel)]="filterState" (input)="applyFilters()" />
+    </div>
+  </div>
+
+  <table class="table mt-3">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>State</th>
+      <th>Age</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let person of filteredPersons">
+      <td>{{ person.id }}</td>
+      <td>{{ person.name }}</td>
+      <td>{{ person.state }}</td>
+      <td>{{ person.age }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
