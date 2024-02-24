@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Object } from '../object.model';
-import { PersonService } from '../person.service';
+import { PersonService } from '../person.service'
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,8 +15,12 @@ export class ObjectTableComponent implements OnInit {
   filterName = '';
   filterState = '';
 
-  constructor(private personService: PersonService) {}
+  constructor(private personService: PersonService, private router: Router) {}
 
+  viewDetails(person: Object): void {
+    // Navigate to the detailed view with the person's ID
+    this.router.navigate(['/info-about', person.id]);
+  }
   ngOnInit(): void {
     this.persons = this.personService.getPersons();
     this.applyFilters();
