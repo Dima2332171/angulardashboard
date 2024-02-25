@@ -11,9 +11,7 @@ import {PopupService} from "../popup.service";
 export class NavigationComponent implements OnInit {
 
   constructor(private router: Router, private personService: PersonService, private popupService: PopupService) { }
-  goToInfoTextImg(): void {
-    this.router.navigate(['/info-text-img']);
-  }
+
 
   openObjectListPopup(): void {
     const persons = this.personService.getPersons();
