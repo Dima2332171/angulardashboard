@@ -17,10 +17,7 @@ export class ObjectTableComponent implements OnInit {
 
   constructor(private personService: PersonService, private router: Router) {}
 
-  viewDetails(person: Object): void {
-    // Navigate to the detailed view with the person's ID
-    this.router.navigate(['/info-about', person.id]);
-  }
+
   ngOnInit(): void {
     this.persons = this.personService.getPersons();
     this.applyFilters();

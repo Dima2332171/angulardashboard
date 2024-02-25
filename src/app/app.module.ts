@@ -16,7 +16,7 @@ import { ObjectListPopupComponent } from './object-list-popup/object-list-popup.
 const routes: Routes = [
   { path: 'object-table', component: ObjectTableComponent },
   { path: 'info-text-img', component: InfoTextImgComponent },
-  { path: 'info-about/:id', component: InfoAboutComponent},//something create with id
+  { path: 'info-about', component: InfoAboutComponent},
   { path: '', redirectTo: '/object-table', pathMatch: 'full' }
 ];
 

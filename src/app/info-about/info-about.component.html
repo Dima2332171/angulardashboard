@@ -1,10 +1,16 @@
 <div class="chart-container">
-  <canvas baseChart
-          [type]="'line'"
-          [data]="lineChartData"
-          [options]="lineChartOptions"
-          [legend]="lineChartLegend">
-  </canvas>
+  <div class="text-center">
+    <button (click)="switchTimezone('UTC')">UTC</button>
+    <button (click)="switchTimezone('Kyiv+2')">Kyiv +2</button>
+    <button (click)="switchTimezone('Kyiv+3')">Kyiv +3</button>
+
+    <canvas baseChart
+            [type]="'line'"
+            [data]="lineChartData"
+            [options]="lineChartOptions"
+            [legend]="lineChartLegend">
+    </canvas>
+  </div>
   <canvas baseChart
           [data]="barChartData"
           [options]="barChartOptions"
@@ -51,3 +57,4 @@
           [options]="scatterChartOptions"
           [type]="'scatter'">
   </canvas>
+</div>

@@ -7,33 +7,72 @@ import { ChartConfiguration, ChartOptions } from "chart.js";
   styleUrls: ['./info-about.component.css']
 })
 export class InfoAboutComponent {
-  public lineChartData: ChartConfiguration<'line'>['data'] = {
-    labels: [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July'
-    ],
-    datasets: [
-      {
-        data: [ 65, 59, 80, 81, 56, 55, 40 ],
-        label: 'Series A',
-        fill: true,
-        tension: 0.5,
-        borderColor: 'black',
-        backgroundColor: 'rgba(255,0,0,0.3)'
-      }
-    ]
-  };
+  public lineChartData: ChartConfiguration<'line'>['data'];
   public lineChartOptions: ChartOptions<'line'> = {
-    responsive: false
+    responsive: false,
+    scales: {
+      x: {
+        ticks: {
+          callback: function(value: any) {
+            return value.toString().substring(0, 12); // Отображение только первых 12 символов
+          },
+        },
+      },
+    },
   };
   public lineChartLegend = true;
-  public barChartLegend = true;
-  public barChartPlugins = [];
+  public timezoneOffset = 0;
+
+  updateChartData() {
+    const dates = [
+      new Date('2022-01-01T00:00:00Z'),
+      new Date('2022-02-01T00:00:00Z'),
+      new Date('2022-03-01T00:00:00Z'),
+      new Date('2022-04-01T00:00:00Z'),
+      new Date('2022-05-01T00:00:00Z'),
+      new Date('2022-06-01T00:00:00Z'),
+      new Date('2022-07-01T00:00:00Z'),
+    ];
+
+    this.lineChartData = {
+      labels: dates.map(date => this.formatDate(date)),
+      datasets: [
+        {
+          data: [65, 59, 80, 81, 56, 55, 40],
+          label: 'Series A',
+          fill: true,
+          tension: 0.5,
+          borderColor: 'black',
+          backgroundColor: 'rgba(255,0,0,0.3)',
+        },
+      ],
+    };
+  }
+
+  formatDate(date: Date): string {
+    const adjustedDate = new Date(date.getTime() + this.timezoneOffset * 60 * 60 * 1000);
+    return adjustedDate.toISOString().substring(0, 19).replace('T', ' ');
+  }
+
+  switchTimezone(timezone: string) {
+    switch (timezone) {
+      case 'UTC':
+        this.timezoneOffset = 0;
+        break;
+      case 'Kyiv+2':
+        this.timezoneOffset = 2;
+        break;
+      case 'Kyiv+3':
+        this.timezoneOffset = 3;
+        break;
+      default:
+        this.timezoneOffset = 0;
+        break;
+    }
+
+    this.updateChartData();
+  }
+
 
   public barChartData: ChartConfiguration<'bar'>['data'] = {
     labels: [ '2006', '2007', '2008', '2009', '2010', '2011', '2012' ],
@@ -46,6 +85,9 @@ export class InfoAboutComponent {
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {
     responsive: false,
   };
+  public barChartLegend = true;
+  public barChartPlugins = [];
+
   public pieChartOptions: ChartOptions<'pie'> = {
     responsive: false,
   };
@@ -55,6 +97,7 @@ export class InfoAboutComponent {
   } ];
   public pieChartLegend = true;
   public pieChartPlugins = [];
+
   public doughnutChartLabels: string[] = [ 'Download Sales', 'In-Store Sales', 'Mail-Order Sales' ];
   public doughnutChartDatasets: ChartConfiguration<'doughnut'>['data']['datasets'] = [
     { data: [ 350, 450, 100 ], label: 'Series A' },
@@ -65,6 +108,7 @@ export class InfoAboutComponent {
   public doughnutChartOptions: ChartConfiguration<'doughnut'>['options'] = {
     responsive: false
   };
+
   public radarChartOptions: ChartConfiguration<'radar'>['options'] = {
     responsive: false,
   };
@@ -85,6 +129,7 @@ export class InfoAboutComponent {
   public polarAreaOptions: ChartConfiguration<'polarArea'>['options'] = {
     responsive: false,
   };
+
   public bubbleChartOptions: ChartConfiguration<'bubble'>['options'] = {
     responsive: false,
     scales: {
@@ -111,6 +156,7 @@ export class InfoAboutComponent {
       label: 'Series A',
     },
   ];
+
   public scatterChartDatasets: ChartConfiguration<'scatter'>['data']['datasets'] = [
     {
       data: [
