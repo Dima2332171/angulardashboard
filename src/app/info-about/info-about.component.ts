@@ -14,7 +14,7 @@ export class InfoAboutComponent {
       x: {
         ticks: {
           callback: function(value: any) {
-            return value.toString().substring(0, 12); // Отображение только первых 12 символов
+            return value.toString().substring(0, 1);
           },
         },
       },
@@ -175,5 +175,6 @@ export class InfoAboutComponent {
     responsive: false,
   };
   constructor() {
+    this.switchTimezone('UTC');
   }
 }
