@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ChartConfiguration, ChartOptions, ChartType } from "chart.js";
+import { ChartConfiguration, ChartOptions } from "chart.js";
 
 @Component({
   selector: 'app-info-about',
@@ -7,8 +7,6 @@ import { ChartConfiguration, ChartOptions, ChartType } from "chart.js";
   styleUrls: ['./info-about.component.css']
 })
 export class InfoAboutComponent {
-  title = 'ng2-charts-demo';
-
   public lineChartData: ChartConfiguration<'line'>['data'] = {
     labels: [
       'January',
@@ -131,8 +129,5 @@ export class InfoAboutComponent {
     responsive: false,
   };
   constructor() {
-  }
-
-  ngOnInit() {
   }
 }

@@ -11,6 +11,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {NgChartsModule} from "ng2-charts";
 import { InfoTextImgComponent } from './info-text-img/info-text-img.component';
 import { InfoAboutComponent } from './info-about/info-about.component';
+import { ObjectListPopupComponent } from './object-list-popup/object-list-popup.component';
 
 const routes: Routes = [
   { path: 'object-table', component: ObjectTableComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
     ObjectTableComponent,
     InfoTextImgComponent,
     InfoAboutComponent,
+    ObjectListPopupComponent,
   ],
   imports: [
     BrowserModule,

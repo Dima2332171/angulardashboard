@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
+import {PersonService} from "../person.service";
+import {PopupService} from "../popup.service";
 
 @Component({
   selector: 'app-navigation',
@@ -8,9 +10,14 @@ import {Router} from "@angular/router";
 })
 export class NavigationComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private personService: PersonService, private popupService: PopupService) { }
   goToInfoTextImg(): void {
     this.router.navigate(['/info-text-img']);
+  }
+
+  openObjectListPopup(): void {
+    const persons = this.personService.getPersons();
+    this.popupService.openObjectListPopup(persons);
   }
     ngOnInit(): void {
   }
